@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Handles the data scraping printing component
+ * of the sales analysis.
+ * 
+ * @author Mason Heuberger, mheuberger@student.sdccd.edu
+ * @version 1.0
+ * @since 2026-11-22
+ */
 public class SalesAnalysis {
     private double[] weeklyTotal;
     private int lineNumber;
@@ -8,12 +16,22 @@ public class SalesAnalysis {
 
     public static final int WEEKS_IN_MONTH = 4;
 
+    /**
+     * Constructs based on a given fileName.
+     * 
+     * @param fileName path/name of the data file
+     */
     public SalesAnalysis(String fileName) {
         inputFile = fileName;
         weeklyTotal = new double[WEEKS_IN_MONTH];
         lineNumber = 0;
     }
 
+    /**
+     * Processes the data within inputFile.
+     * 
+     * @throws IOException TOCTOU for deletion or perms of inputFile
+     */
     public void processFile() throws IOException {
         File fileIn = new File(inputFile);
         Scanner scanner = new Scanner(fileIn);
@@ -24,6 +42,11 @@ public class SalesAnalysis {
         scanner.close();
     }
 
+    /**
+     * Stores the read data for each row of the input file.
+     * 
+     * @param inArray a row of sales data
+     */
     private void setArrayElement(String[] inArray) {
         weeklyTotal[lineNumber] = 0.;
 
@@ -33,6 +56,9 @@ public class SalesAnalysis {
         lineNumber++;
     }
 
+    /**
+     * Cleanly formats and prints the collected data.
+     */
     public void writeOutput() {
         String str = "";
 
@@ -61,5 +87,4 @@ public class SalesAnalysis {
 
         System.out.println(str);
     }
-
 }
